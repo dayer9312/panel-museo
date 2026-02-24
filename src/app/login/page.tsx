@@ -1,86 +1,108 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-  const router = useRouter();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [correo, setCorreo] = useState("");
+  const [contrasena, setContrasena] = useState("");
+  const [error, setError] = useState("");
+  const [cargando, setCargando] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+    setError("");
+    setCargando(true);
+
     try {
-      // 1. Enviamos el correo y contraseña al backend real
-      const respuesta = await fetch("http://localhost:3000/usuario/login", {
+      const res = await fetch("http://localhost:3000/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          correo: email, 
-          contrasena: password 
-        }),
+        body: JSON.stringify({ correo, contrasena }),
       });
 
-      // 2. Verificamos la respuesta del servidor
-      if (respuesta.ok) {
-        const data = await respuesta.json();
+      if (res.ok) {
+        const data = await res.json();
         
-        // Guardamos los datos del usuario real en el navegador
-        localStorage.setItem("isLoggedIn", "true"); 
-        localStorage.setItem("usuarioNombre", data.usuario.nombre); 
-        
-        router.push("/dashboard"); // ¡Abre la puerta!
+        // 🔐 ¡Aquí atrapamos el JWT y los datos del usuario!
+        localStorage.setItem("token", data.access_token);
+        localStorage.setItem("userRole", data.usuario.rol);
+        localStorage.setItem("userName", data.usuario.nombre);
+        localStorage.setItem("isLoggedIn", "true");
+
+        // Usamos window.location para forzar la recarga y que el Layout lea el nuevo rol
+        window.location.href = "/dashboard";
       } else {
-        alert("⚠️ Credenciales incorrectas. Intenta de nuevo.");
+        setError("Acceso denegado. Verifica tu correo y contraseña.");
       }
-    } catch (error) {
-      alert("Error al conectar con el servidor. Verifica que tu backend esté encendido.");
+    } catch (err) {
+      setError("Error de conexión con el servidor.");
+    } finally {
+      setCargando(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-xl shadow-2xl p-8 space-y-6">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50">
+      <div className="max-w-md w-full p-8 bg-white rounded-2xl shadow-xl border border-slate-100">
         
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-slate-800 tracking-wide">CASA DE LA LIBERTAD</h1>
-          <p className="text-slate-500 mt-2">Panel de Administración</p>
+        {/* Encabezado */}
+        <div className="text-center mb-8">
+          <h1 className="text-2xl font-black tracking-tighter text-slate-900 mb-1">
+            CASA DE LA <span className="text-indigo-600">LIBERTAD</span>
+          </h1>
+          <p className="text-sm font-bold text-slate-400 tracking-[0.2em] uppercase">
+            Monkey Studio Management
+          </p>
         </div>
 
-        <form onSubmit={handleLogin} className="space-y-4 mt-8">
+        {/* Mensaje de Error */}
+        {error && (
+          <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 text-sm rounded-lg text-center font-medium">
+            {error}
+          </div>
+        )}
+
+        {/* Formulario */}
+        <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Correo Electrónico</label>
+            <label className="block text-sm font-bold text-slate-700 mb-2">
+              Correo Electrónico
+            </label>
             <input 
               type="email" 
-              required
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
+              required 
+              className="w-full px-4 py-3 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-slate-50 focus:bg-white"
               placeholder="admin@monkeystudio.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={correo}
+              onChange={(e) => setCorreo(e.target.value)}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Contraseña</label>
+            <label className="block text-sm font-bold text-slate-700 mb-2">
+              Contraseña
+            </label>
             <input 
               type="password" 
-              required
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
+              required 
+              className="w-full px-4 py-3 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-slate-50 focus:bg-white"
               placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={contrasena}
+              onChange={(e) => setContrasena(e.target.value)}
             />
           </div>
 
           <button 
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors mt-4"
+            type="submit" 
+            disabled={cargando}
+            className="w-full bg-slate-900 hover:bg-indigo-600 text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 transform active:scale-95 disabled:bg-slate-400 disabled:cursor-not-allowed shadow-lg hover:shadow-indigo-500/30"
           >
-            Ingresar al Sistema
+            {cargando ? "Verificando credenciales..." : "Ingresar al Panel"}
           </button>
         </form>
 
+        <div className="mt-8 text-center text-xs text-slate-400">
+          <p>Sistema de gestión exclusivo para personal autorizado.</p>
+        </div>
       </div>
     </div>
   );

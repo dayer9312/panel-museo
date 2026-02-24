@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { 
   HiOutlineHome, 
   HiOutlineLibrary, 
@@ -14,6 +16,41 @@ import {
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+
+  const router = useRouter();
+  
+  const [userRole, setUserRole] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | null>("Admin");
+  const [verificando, setVerificando] = useState(true);
+
+  useEffect(() => {
+    // 1. Buscamos el token y los datos en el bolsillo (localStorage)
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("userRole");
+    const name = localStorage.getItem("userName");
+
+    // 2. Si no hay token, lo mandamos directo al Login
+    if (!token) {
+      router.push("/login");
+    } else {
+      // 3. Si todo está en orden, lo dejamos pasar
+      setUserRole(role);
+      setUserName(name);
+      setVerificando(false);
+    }
+  }, [router]);
+
+  // Pantalla de carga mientras el guardia revisa el gafete
+  if (verificando) {
+    return (
+      <div className="h-screen w-full flex items-center justify-center bg-slate-50">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-slate-500 font-bold uppercase tracking-widest text-sm">Verificando seguridad...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Función para saber si el enlace está activo
   const isActive = (path: string) => pathname === path;
@@ -86,7 +123,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </div>
             <div className="flex items-center space-x-4">
                 <div className="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-xs">
-                    AD
+                    {userName?.charAt(0) || 'U'}
                 </div>
             </div>
         </header>
