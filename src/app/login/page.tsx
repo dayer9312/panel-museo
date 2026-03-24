@@ -13,7 +13,7 @@ export default function LoginPage() {
     setCargando(true);
 
     try {
-      const res = await fetch("http://localhost:3000/auth/login", {
+      const res = await fetch("http://localhost:3001/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ correo, contrasena }),
@@ -50,7 +50,7 @@ export default function LoginPage() {
             CASA DE LA <span className="text-indigo-600">LIBERTAD</span>
           </h1>
           <p className="text-sm font-bold text-slate-400 tracking-[0.2em] uppercase">
-            Monkey Studio Management
+            Museo de la Casa de la Libertad
           </p>
         </div>
 
@@ -64,13 +64,13 @@ export default function LoginPage() {
         {/* Formulario */}
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label className="block text-sm font-bold text-slate-700 mb-2">
+            <label className="block text-sm font-bold text-slate-700 mb-2 text-gray-900">
               Correo Electrónico
             </label>
             <input 
               type="email" 
               required 
-              className="w-full px-4 py-3 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-slate-50 focus:bg-white"
+              className="w-full px-4 py-3 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-slate-50 focus:bg-white text-gray-900"
               placeholder="admin@monkeystudio.com"
               value={correo}
               onChange={(e) => setCorreo(e.target.value)}
@@ -84,7 +84,7 @@ export default function LoginPage() {
             <input 
               type="password" 
               required 
-              className="w-full px-4 py-3 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-slate-50 focus:bg-white"
+              className="w-full px-4 py-3 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-slate-50 focus:bg-white text-gray-900"
               placeholder="••••••••"
               value={contrasena}
               onChange={(e) => setContrasena(e.target.value)}

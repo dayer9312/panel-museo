@@ -8,7 +8,7 @@ export default function BotonEliminarObjeto({ idObjeto }: { idObjeto: number }) 
     const confirmacion = window.confirm("¿Seguro que deseas eliminar esta pieza del museo?");
     if (confirmacion) {
       try {
-        const respuesta = await fetch(`http://localhost:3000/objeto/${idObjeto}`, { method: "DELETE" });
+        const respuesta = await fetch(`http://localhost:3001/objeto/${idObjeto}`, { method: "DELETE" });
         if (respuesta.ok) {
           router.refresh();
         } else {

@@ -10,12 +10,12 @@ import {
 export default async function DashboardPage() {
   // Realizamos todas las consultas en paralelo, incluyendo la nueva de estadísticas
   const [resSalas, resObjetos, resMedia, resUsuarios, resQr, resVisitas] = await Promise.all([
-    fetch('http://localhost:3000/sala', { cache: 'no-store' }),
-    fetch('http://localhost:3000/objeto', { cache: 'no-store' }),
-    fetch('http://localhost:3000/media', { cache: 'no-store' }),
-    fetch('http://localhost:3000/usuario', { cache: 'no-store' }),
-    fetch('http://localhost:3000/codigo-qr', { cache: 'no-store' }),
-    fetch('http://localhost:3000/estadistica-visita', { cache: 'no-store' }),
+    fetch('http://127.0.0.1:3001/sala', { cache: 'no-store' }),
+    fetch('http://127.0.0.1:3001/objeto', { cache: 'no-store' }),
+    fetch('http://127.0.0.1:3001/media', { cache: 'no-store' }),
+    fetch('http://127.0.0.1:3001/usuario', { cache: 'no-store' }),
+    fetch('http://127.0.0.1:3001/codigo-qr', { cache: 'no-store' }), // Asegúrate de que esta ruta exista
+    fetch('http://127.0.0.1:3001/estadistica-visita', { cache: 'no-store' }) // Asegúrate de que esta ruta exista
   ]);
 
   const salas = await resSalas.json();

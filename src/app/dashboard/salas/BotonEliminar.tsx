@@ -11,7 +11,7 @@ export default function BotonEliminar({ idSala }: { idSala: number }) {
     if (confirmacion) {
       try {
         // 2. Disparamos el DELETE a tu backend
-        const respuesta = await fetch(`http://localhost:3000/sala/${idSala}`, {
+        const respuesta = await fetch(`http://localhost:3001/sala/${idSala}`, {
           method: "DELETE",
         });
 

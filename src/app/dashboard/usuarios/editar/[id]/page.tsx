@@ -22,7 +22,7 @@ export default function EditarUsuarioPage() {
   useEffect(() => {
     const cargarUsuario = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/usuario/${idUsuario}`);
+        const res = await fetch(`http://localhost:3001/usuario/${idUsuario}`);
         if (res.ok) {
           const data = await res.json();
           setFormData({
@@ -55,7 +55,7 @@ export default function EditarUsuarioPage() {
     }
 
     try {
-      const res = await fetch(`http://localhost:3000/usuario/${idUsuario}`, {
+      const res = await fetch(`http://localhost:3001/usuario/${idUsuario}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(datosActualizados),
@@ -84,28 +84,28 @@ export default function EditarUsuarioPage() {
         <form onSubmit={actualizar} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-bold text-slate-700 mb-1">Nombre</label>
+              <label className="block text-sm font-bold text-slate-700 mb-1 text-gray-900">Nombre</label>
               <input type="text" required className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-indigo-500" 
                 value={formData.nombre} onChange={e => setFormData({...formData, nombre: e.target.value})} />
             </div>
             <div>
-              <label className="block text-sm font-bold text-slate-700 mb-1">Apellido</label>
+              <label className="block text-sm font-bold text-slate-700 mb-1 text-gray-900">Apellido</label>
               <input type="text" required className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-indigo-500" 
                 value={formData.apellido} onChange={e => setFormData({...formData, apellido: e.target.value})} />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-bold text-slate-700 mb-1">Correo Electrónico</label>
+            <label className="block text-sm font-bold text-slate-700 mb-1 text-gray-900">Correo Electrónico</label>
             <input type="email" required className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-indigo-500" 
               value={formData.correo} onChange={e => setFormData({...formData, correo: e.target.value})} />
           </div>
           <div>
-            <label className="block text-sm font-bold text-slate-700 mb-1">Nueva Contraseña (Dejar en blanco para no cambiar)</label>
+            <label className="block text-sm font-bold text-slate-700 mb-1 text-gray-900">Nueva Contraseña (Dejar en blanco para no cambiar)</label>
             <input type="password" placeholder="••••••••" className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-indigo-500" 
               value={formData.contrasena} onChange={e => setFormData({...formData, contrasena: e.target.value})} />
           </div>
           <div>
-            <label className="block text-sm font-bold text-slate-700 mb-1">Rol de Acceso</label>
+            <label className="block text-sm font-bold text-slate-700 mb-1 text-gray-900">Rol de Acceso</label>
             <select className="w-full px-4 py-2 border rounded-lg bg-white outline-none focus:ring-2 focus:ring-indigo-500" 
               value={formData.rol} onChange={e => setFormData({...formData, rol: e.target.value})}>
               <option value="EDITOR">Editor</option>

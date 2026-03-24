@@ -11,7 +11,7 @@ export default function NuevoQrPage() {
   const [guardando, setGuardando] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:3000/objeto").then(res => res.json()).then(data => {
+    fetch("http://localhost:3001/objeto").then(res => res.json()).then(data => {
       setObjetos(data);
       if (data.length > 0) setIdObjeto(data[0].id_objeto.toString());
     });
@@ -21,7 +21,7 @@ export default function NuevoQrPage() {
     e.preventDefault();
     setGuardando(true);
     try {
-      const res = await fetch("http://localhost:3000/codigo-qr", {
+      const res = await fetch("http://localhost:3001/codigo-qr", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ codigo, id_objeto: Number(idObjeto), estado: "ACTIVO" }),
@@ -47,11 +47,11 @@ export default function NuevoQrPage() {
         <form onSubmit={guardarQR} className="space-y-6">
           <div>
             <label className="block text-sm font-bold text-slate-700 mb-1">Identificador Único</label>
-            <input type="text" required className="w-full px-4 py-2 border rounded-lg" placeholder="Ej: QR-ACTA-1825" value={codigo} onChange={(e) => setCodigo(e.target.value)} />
+            <input type="text" required className="w-full px-4 py-2 border rounded-lg text-gray-900" placeholder="Ej: QR-ACTA-1825" value={codigo} onChange={(e) => setCodigo(e.target.value)} />
           </div>
           <div>
             <label className="block text-sm font-bold text-slate-700 mb-1">Asociar a Objeto</label>
-            <select className="w-full px-4 py-2 border rounded-lg" value={idObjeto} onChange={(e) => setIdObjeto(e.target.value)}>
+            <select className="w-full px-4 py-2 border rounded-lg text-gray-900" value={idObjeto} onChange={(e) => setIdObjeto(e.target.value)}>
               {objetos.map(obj => <option key={obj.id_objeto} value={obj.id_objeto}>{obj.titulo}</option>)}
             </select>
           </div>

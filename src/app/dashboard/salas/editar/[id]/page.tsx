@@ -17,7 +17,7 @@ export default function EditarSalaPage() {
   useEffect(() => {
     const cargarDatos = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/sala/${idSala}`);
+        const res = await fetch(`http://localhost:3001/sala/${idSala}`);
         const data = await res.json();
         
         // Llenamos los cajoncitos con la información de la base de datos
@@ -38,7 +38,7 @@ export default function EditarSalaPage() {
     setCargando(true);
 
     try {
-      const respuesta = await fetch(`http://localhost:3000/sala/${idSala}`, {
+      const respuesta = await fetch(`http://localhost:3001/sala/${idSala}`, {
         method: "PATCH", // PATCH es para actualizar!
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nombre, descripcion, orden: Number(orden) }),
@@ -69,16 +69,16 @@ export default function EditarSalaPage() {
       <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-8">
         <form onSubmit={actualizarSala} className="space-y-6">
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-1">Nombre</label>
-            <input type="text" required className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+            <label className="block text-sm font-semibold text-slate-700 mb-1 text-gray-900">Nombre</label>
+            <input type="text" required className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none text-gray-900" value={nombre} onChange={(e) => setNombre(e.target.value)} />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-1">Descripción</label>
-            <textarea required rows={4} className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none resize-none" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} />
+            <label className="block text-sm font-semibold text-slate-700 mb-1 text-gray-900">Descripción</label>
+            <textarea required rows={4} className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none resize-none text-gray-900" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-1">Orden del Recorrido</label>
-            <input type="number" required min="1" className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none" value={orden} onChange={(e) => setOrden(Number(e.target.value))} />
+            <label className="block text-sm font-semibold text-slate-700 mb-1 text-gray-900">Orden del Recorrido</label>
+            <input type="number" required min="1" className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none text-gray-900" value={orden} onChange={(e) => setOrden(Number(e.target.value))} />
           </div>
           <div className="flex gap-4 pt-4 border-t border-slate-100">
             <button type="submit" disabled={cargando} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-colors disabled:bg-blue-400">

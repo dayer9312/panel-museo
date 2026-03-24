@@ -5,7 +5,7 @@ import BotonEliminarQR from "./BotonEliminarQR";
 export default async function QrPage() {
   let codigos = [];
   try {
-    const respuesta = await fetch('http://localhost:3000/codigo-qr', { cache: 'no-store' });
+    const respuesta = await fetch('http://localhost:3001/codigo-qr', { cache: 'no-store' });
     if (respuesta.ok) codigos = await respuesta.json();
   } catch (error) {
     console.error("Error cargando QRs:", error);

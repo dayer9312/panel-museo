@@ -3,7 +3,8 @@ import Link from "next/link";
 export default async function MultimediaPage() {
   let archivos = [];
   try {
-    const respuesta = await fetch('http://localhost:3000/media', { cache: 'no-store' });
+    // Usamos 127.0.0.1 para evitar el error de IPv6 que vimos en el Dashboard
+    const respuesta = await fetch('http://127.0.0.1:3001/media', { cache: 'no-store' });
     if (respuesta.ok) {
       archivos = await respuesta.json();
     }
@@ -42,13 +43,18 @@ export default async function MultimediaPage() {
               </thead>
               <tbody>
                 {archivos.map((media: any) => {
-                  // Lógica inteligente para saber si la URL es de internet o local
-                  const urlFinal = media.url?.startsWith("http") 
-                    ? media.url 
-                    : `http://localhost:3000/${media.url?.replace(/^\//, '')}`;
+                  
+                  // LÓGICA DEFINITIVA Y A PRUEBA DE BALAS 🚀
+                  // 1. Agarramos la ruta de la base de datos y la cortamos por cada barra "/"
+                  const partes = media.url ? media.url.split('/') : [];
+                  
+                  // 2. Nos quedamos SOLO con la última parte (el nombre real del archivo: "177168...png")
+                  const nombreArchivo = partes.length > 0 ? partes[partes.length - 1] : '';
+                  
+                  // 3. Forzamos la conexión al backend (3001) pase lo que pase
+                  const urlFinal = `http://127.0.0.1:3001/uploads/${nombreArchivo}`;
 
                   return (
-                    // Usamos id_medio exactamente como está en tu BD
                     <tr key={media.id_medio} className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
                       <td className="p-4">
                         {media.tipo === 'IMAGEN' ? (

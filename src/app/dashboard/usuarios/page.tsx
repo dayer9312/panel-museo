@@ -4,7 +4,7 @@ import BotonEliminarUsuario from "./BotonEliminarUsuario";
 export default async function UsuariosPage() {
   let usuarios = [];
   try {
-    const respuesta = await fetch('http://localhost:3000/usuario', { cache: 'no-store' });
+    const respuesta = await fetch('http://localhost:3001/usuario', { cache: 'no-store' });
     if (respuesta.ok) usuarios = await respuesta.json();
   } catch (error) {
     console.error("Error cargando usuarios:", error);

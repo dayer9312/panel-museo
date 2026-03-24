@@ -2,7 +2,7 @@ import Link from "next/link";
 import BotonEliminar from "./BotonEliminar"; // <--- Importamos tu nuevo botón
 
 export default async function SalasPage() {
-  const respuesta = await fetch('http://localhost:3000/sala', { cache: 'no-store' });
+  const respuesta = await fetch('http://localhost:3001/sala', { cache: 'no-store' });
   const salas = await respuesta.json();
 
   return (

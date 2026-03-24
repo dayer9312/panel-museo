@@ -11,7 +11,7 @@ export default function BotonEliminarUsuario({ idUsuario }: { idUsuario: number 
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch(`http://localhost:3000/usuario/${idUsuario}`, {
+      const res = await fetch(`http://localhost:3001/usuario/${idUsuario}`, {
         method: "DELETE",
         headers: {
           // 2. Se lo mostramos al guardia del Backend usando el formato Bearer

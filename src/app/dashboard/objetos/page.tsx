@@ -3,7 +3,7 @@ import BotonEliminarObjeto from "./BotonEliminarObjeto";
 
 export default async function ObjetosPage() {
   // Pedimos todos los objetos al backend (gracias a Prisma, esto ya incluye los datos de la sala)
-  const respuesta = await fetch('http://localhost:3000/objeto', { cache: 'no-store' });
+  const respuesta = await fetch('http://localhost:3001/objeto', { cache: 'no-store' });
   const objetos = await respuesta.json();
 
   return (

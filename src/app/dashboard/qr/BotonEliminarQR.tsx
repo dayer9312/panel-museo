@@ -7,7 +7,7 @@ export default function BotonEliminarQR({ idQr }: { idQr: number }) {
   const eliminar = async () => {
     if (confirm("¿Seguro que deseas eliminar este registro QR?")) {
       try {
-        const res = await fetch(`http://localhost:3000/codigo-qr/${idQr}`, {
+        const res = await fetch(`http://localhost:3001/codigo-qr/${idQr}`, {
           method: "DELETE",
         });
         if (res.ok) router.refresh();

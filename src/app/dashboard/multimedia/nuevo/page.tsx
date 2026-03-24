@@ -19,7 +19,7 @@ export default function NuevoMultimediaPage() {
   useEffect(() => {
     const fetchObjetos = async () => {
       try {
-        const res = await fetch("http://localhost:3000/objeto");
+        const res = await fetch("http://localhost:3001/objeto");
         const data = await res.json();
         setObjetos(data);
         if (data.length > 0) setIdObjeto(data[0].id_objeto.toString());
@@ -51,7 +51,7 @@ export default function NuevoMultimediaPage() {
 
     try {
       // 2. CAMBIO CLAVE: Apuntamos al endpoint correcto: /media/subir
-      const respuesta = await fetch("http://localhost:3000/media/subir", {
+      const respuesta = await fetch("http://localhost:3001/media/subir", {
         method: "POST",
         body: formData,
       });

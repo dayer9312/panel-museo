@@ -59,7 +59,7 @@ export default function EditarObjetoPage() {
     setGuardando(true);
 
     try {
-      const respuesta = await fetch(`http://localhost:3000/objeto/${idObjeto}`, {
+      const respuesta = await fetch(`http://localhost:3001/objeto/${idObjeto}`, {
         method: "PATCH", // Ojo aquí: PATCH es para actualizar
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -100,11 +100,11 @@ export default function EditarObjetoPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="col-span-2">
               <label className="block text-sm font-semibold text-slate-700 mb-1">Título de la Pieza *</label>
-              <input type="text" required className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none" value={titulo} onChange={(e) => setTitulo(e.target.value)} />
+              <input type="text" required className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none text-gray-900" value={titulo} onChange={(e) => setTitulo(e.target.value)} />
             </div>
             <div>
               <label className="block text-sm font-semibold text-slate-700 mb-1">Autor / Creador</label>
-              <input type="text" className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none" value={autor} onChange={(e) => setAutor(e.target.value)} />
+              <input type="text" className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none text-gray-900" value={autor} onChange={(e) => setAutor(e.target.value)} />
             </div>
             <div>
               <label className="block text-sm font-semibold text-slate-700 mb-1">Año o Época</label>
@@ -114,13 +114,13 @@ export default function EditarObjetoPage() {
 
           <div>
             <label className="block text-sm font-semibold text-slate-700 mb-1">Descripción Histórica *</label>
-            <textarea required rows={4} className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none resize-none" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} />
+            <textarea required rows={4} className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none resize-none text-gray-900" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 bg-slate-50 rounded-lg border border-slate-100">
             <div>
               <label className="block text-sm font-semibold text-slate-700 mb-1">Ubicación (Sala) *</label>
-              <select required className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none bg-white" value={idSala} onChange={(e) => setIdSala(e.target.value)}>
+              <select required className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none bg-white text-gray-900" value={idSala} onChange={(e) => setIdSala(e.target.value)}>
                 <option value="" disabled>Selecciona una sala...</option>
                 {salas.map((sala) => (
                   <option key={sala.id_sala} value={sala.id_sala}>{sala.nombre}</option>
@@ -129,7 +129,7 @@ export default function EditarObjetoPage() {
             </div>
             <div>
               <label className="block text-sm font-semibold text-slate-700 mb-1">Estado de Conservación *</label>
-              <select className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none bg-white" value={estadoConservacion} onChange={(e) => setEstadoConservacion(e.target.value)}>
+              <select className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none bg-white text-gray-900" value={estadoConservacion} onChange={(e) => setEstadoConservacion(e.target.value)}>
                 <option value="BUENO">Bueno (Óptimas condiciones)</option>
                 <option value="REGULAR">Regular (Requiere cuidado)</option>
                 <option value="MALO">Malo (En restauración)</option>

@@ -18,7 +18,7 @@ export default function NuevoUsuarioPage() {
     e.preventDefault();
     setGuardando(true);
     try {
-      const res = await fetch("http://localhost:3000/usuario", {
+      const res = await fetch("http://localhost:3001/usuario", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -46,28 +46,28 @@ export default function NuevoUsuarioPage() {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-bold text-slate-700 mb-1">Nombre</label>
-              <input type="text" required className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-indigo-500" 
+              <input type="text" required className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900" 
                 onChange={e => setFormData({...formData, nombre: e.target.value})} />
             </div>
             <div>
               <label className="block text-sm font-bold text-slate-700 mb-1">Apellido</label>
-              <input type="text" required className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-indigo-500" 
+              <input type="text" required className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900" 
                 onChange={e => setFormData({...formData, apellido: e.target.value})} />
             </div>
           </div>
           <div>
             <label className="block text-sm font-bold text-slate-700 mb-1">Correo Electrónico</label>
-            <input type="email" required className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-indigo-500" 
+            <input type="email" required className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900" 
               onChange={e => setFormData({...formData, correo: e.target.value})} />
           </div>
           <div>
             <label className="block text-sm font-bold text-slate-700 mb-1">Contraseña</label>
-            <input type="password" required className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-indigo-500" 
+            <input type="password" required className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900" 
               onChange={e => setFormData({...formData, contrasena: e.target.value})} />
           </div>
           <div>
             <label className="block text-sm font-bold text-slate-700 mb-1">Rol de Acceso</label>
-            <select className="w-full px-4 py-2 border rounded-lg bg-white outline-none focus:ring-2 focus:ring-indigo-500" 
+            <select className="w-full px-4 py-2 border rounded-lg bg-white outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900" 
               onChange={e => setFormData({...formData, rol: e.target.value})}>
               <option value="EDITOR">Editor</option>
               <option value="ADMIN">Administrador</option>
