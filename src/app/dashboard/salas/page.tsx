@@ -39,7 +39,7 @@ export default async function SalasPage() {
                     <td className="p-4 text-slate-600 text-sm truncate max-w-xs">{sala.descripcion}</td>
                     <td className="p-4 text-center">
                       <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-bold">
-                        {sala.orden_recorrido}
+                        {sala.orden}
                       </span>
                     </td>
                     

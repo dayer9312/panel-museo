@@ -27,8 +27,8 @@ export default function EditarObjetoPage() {
       try {
         // Pedimos ambas cosas al servidor en paralelo
         const [resSalas, resObjeto] = await Promise.all([
-          fetch("http://localhost:3000/sala"),
-          fetch(`http://localhost:3000/objeto/${idObjeto}`)
+          fetch("http://localhost:3001/sala"),
+          fetch(`http://localhost:3001/objeto/${idObjeto}`)
         ]);
 
         const dataSalas = await resSalas.json();

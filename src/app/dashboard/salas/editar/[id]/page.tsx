@@ -23,7 +23,7 @@ export default function EditarSalaPage() {
         // Llenamos los cajoncitos con la información de la base de datos
         setNombre(data.nombre);
         setDescripcion(data.descripcion);
-        setOrden(data.orden_recorrido);
+        setOrden(data.orden);
       } catch (error) {
         alert("Error al cargar la sala.");
       } finally {

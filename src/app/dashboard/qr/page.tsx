@@ -18,6 +18,13 @@ export default async function QrPage() {
           <h2 className="text-3xl font-bold text-slate-800">Códigos QR</h2>
           <p className="text-slate-500 mt-1">Genera identificadores para las piezas del museo.</p>
         </div>
+        <Link 
+          href="/imprimir" 
+          target="_blank" 
+          className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition-colors shadow-sm"
+        >
+          🖨️ Imprimir Todos
+        </Link>
         <Link href="/dashboard/qr/nuevo" className="bg-slate-800 hover:bg-black text-white font-bold py-2 px-4 rounded-lg transition-colors shadow-sm">
           + Generar Nuevo QR
         </Link>
